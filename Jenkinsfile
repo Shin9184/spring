@@ -5,7 +5,8 @@ node {
 
     stage('Build Gradle') {
       steps {
-        sh 'gradle clean build'
+        sh 'chmod +x ./gradlew'
+        sh './gradlew clean build'
         }
     }
 
