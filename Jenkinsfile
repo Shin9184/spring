@@ -10,14 +10,13 @@ pipeline {
       steps {
         sh 'chmod +x ./gradlew'
         sh './gradlew clean build'
-        sh 'docker build -t tlqkddk123/spring .'
         }
     }
     stage ('Push image') {
         steps {
                 checkout scm
                    'step1' docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        def customImage = docker.build("eub456/test:${env.BUILD_ID}")
+                        def customImage = docker.build("tlqkddk123/spring:${env.BUILD_ID}")
                             customImage.push()
                    }
         }
