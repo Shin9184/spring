@@ -3,6 +3,12 @@ node {
         checkout scm
     }
 
+    stage('Build Gradle') {
+      steps {
+        sh 'gradle build'
+        }
+    }
+
     stage('Build Image'){
         app = docker.build("tlqkddk123/spring")
     }
