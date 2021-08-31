@@ -1,29 +1,24 @@
-node {
-    stage('Clone Repository'){
-        checkout scm
+pipeline {
+  agent any
+  stages {
+    stage('Git Progress') {
+      steps {
+        git branch: 'main', credentialsId: 'Shin9184', url: 'https://github.com/Shin9184/spring'
+      }
     }
-
-    stage('Build Gradle') {
+  stage('Gradle Build & Image buil') {
       steps {
         sh 'chmod +x ./gradlew'
         sh './gradlew clean build'
+        sh 'docker build -t tlqkddk123/spring .'
         }
     }
-
-    stage('Build Image'){
-        app = docker.build("tlqkddk123/spring")
-    }
-
-    stage('Test image'){ 
-        app.inside { 
-            sh 'echo "Tests passed"' 
-        } 
-    }
-
-    stage('Push Image'){
-        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub'){
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+    stage ('Docker-hub login') {
+        steps {
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                sh 'docker push eub456/test:lates'
+                }
         }
     }
+  }
 }
