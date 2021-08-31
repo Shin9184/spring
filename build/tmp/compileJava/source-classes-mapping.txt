@@ -1,0 +1,2 @@
+docker/hello/HelloApplication.java
+ docker.hello.HelloApplication
