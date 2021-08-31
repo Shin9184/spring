@@ -16,7 +16,7 @@ pipeline {
     stage ('Docker-hub login') {
         steps {
                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                sh 'docker push eub456/test:lates'
+                sh 'docker push tlqkddk123/spring:latest'
                 }
         }
     }
