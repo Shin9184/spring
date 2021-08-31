@@ -14,11 +14,11 @@ pipeline {
         }
   }
 
-  stage('Push Image') {
+  stage('Build & Push Image') {
       steps {
           docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-              def customImage = docker.build("tlqkddk123/spring)
-              customImage.push("${env.BUILD_NUMBER}")
+              def customImage = docker.build("tlqkddk123/spring")
+              customImage.push("${env.BUILD_ID}")
               customImage.push("latest")
           }
       }
