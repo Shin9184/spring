@@ -5,7 +5,7 @@ node {
 
     stage('Build Gradle') {
       steps {
-        sh 'gradle build'
+        sh './gradle build'
         }
     }
 
