@@ -14,17 +14,12 @@ pipeline {
         }
   }
 
-  stage('Image Build') {
-      steps {
-          app = docker.build("tlqkddk123/spring")
-      }
-  }
-
   stage('Push Image') {
       steps {
           docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-          app.push("${env.BUILD_NUMBER}")
-          app.push("latest")
+              def customImage = docker.build("tlqkddk123/spring)
+              customImage.push("${env.BUILD_NUMBER}")
+              customImage.push("latest")
           }
       }
   }
